@@ -35,6 +35,6 @@ public final class ClassHelper {
      */
     public static  Set<Class<?>> getServiceClassSet() {
         Set<Class<?>> classSet = new HashSet<Class<?>>();
-        
+        return  classSet;
     }
 }
