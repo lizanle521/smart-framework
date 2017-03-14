@@ -1,5 +1,7 @@
 package org.smart4j.framework.helper;
 
+import org.smart4j.framework.annotation.Action;
+import org.smart4j.framework.annotation.Service;
 import org.smart4j.framework.util.ClassUtil;
 import org.smart4j.framework.util.ConfigHelper;
 
@@ -35,6 +37,38 @@ public final class ClassHelper {
      */
     public static  Set<Class<?>> getServiceClassSet() {
         Set<Class<?>> classSet = new HashSet<Class<?>>();
+        for (Class<?> cls : CLASS_SET) {
+            if(cls.isAnnotationPresent(Service.class)){
+                classSet.add(cls);
+            }
+        }
         return  classSet;
     }
+
+    /**
+     * 获取所有controller类
+     * @return
+     */
+    public static Set<Class<?>> getControllerClassSet() {
+        Set<Class<?>> classSet = new HashSet<Class<?>>();
+        for (Class<?> cls : CLASS_SET) {
+            if(cls.isAnnotationPresent(Action.class)){
+                classSet.add(cls);
+            }
+        }
+        return classSet;
+    }
+
+    /**
+     * 获取所有bean类，包括controller和service
+     * @return
+     */
+    public static Set<Class<?>> getBeanClassSet(){
+        Set<Class<?>> classSet = new HashSet<Class<?>>();
+        classSet.addAll(getControllerClassSet());
+        classSet.addAll(getServiceClassSet());
+        return classSet;
+    }
+
+
 }
