@@ -60,4 +60,19 @@ public class CastUtil {
         return castBoolea(property,false);
     }
 
+    public static long castLong(String o) {
+        return castLong(o,0L);
+    }
+
+    public static long castLong(String property,long defaultValue){
+        long v = defaultValue;
+        if(StringUtils.isNoneEmpty(property)){
+            try {
+                v = Long.parseLong(property);
+            } catch (NumberFormatException e) {
+                v = defaultValue;
+            }
+        }
+        return v;
+    }
 }
