@@ -23,6 +23,17 @@ public class DynamicProxy implements InvocationHandler {
         return invoke;
     }
 
+    /**
+     * 封装jdk动态代理实现
+     * @param <T>
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T getProxy(){
+        return (T)Proxy.newProxyInstance(object.getClass().getClassLoader(),
+                object.getClass().getInterfaces(),this);
+    }
+
     public void before(){
         System.out.println("before");
     }
@@ -32,9 +43,10 @@ public class DynamicProxy implements InvocationHandler {
 
     public static void main(String[] args) {
         DynamicProxy proxy = new DynamicProxy(new HelloImpl());
-        Hello o = (Hello)Proxy.newProxyInstance(HelloImpl.class.getClassLoader(),
-                HelloImpl.class.getInterfaces(),
-                proxy);
-        o.say("李赞乐");
+//        Hello o = (Hello)Proxy.newProxyInstance(HelloImpl.class.getClassLoader(),
+//                HelloImpl.class.getInterfaces(),
+//                proxy);
+        Hello proxy1 = proxy.getProxy();
+        proxy1.say("李赞乐");
     }
 }
