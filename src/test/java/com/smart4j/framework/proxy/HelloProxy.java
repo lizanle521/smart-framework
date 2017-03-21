@@ -22,6 +22,6 @@ public class HelloProxy implements Hello {
 
     public static void main(String[] args) {
         HelloProxy helloProxy = new HelloProxy();
-        helloProxy.say("李赞乐");
+        helloProxy.say("xxx");
     }
 }

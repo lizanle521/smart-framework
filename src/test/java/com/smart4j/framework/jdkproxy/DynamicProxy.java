@@ -47,6 +47,6 @@ public class DynamicProxy implements InvocationHandler {
 //                HelloImpl.class.getInterfaces(),
 //                proxy);
         Hello proxy1 = proxy.getProxy();
-        proxy1.say("李赞乐");
+        proxy1.say("xxx");
     }
 }
