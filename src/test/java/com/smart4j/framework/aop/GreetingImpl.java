@@ -1,8 +1,11 @@
 package com.smart4j.framework.aop;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Created by Administrator on 2017/3/22.
  */
+@Component
 public class GreetingImpl implements Greeting {
 
     public void sayHello(String name) {
