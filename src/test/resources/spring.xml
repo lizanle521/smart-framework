@@ -33,4 +33,32 @@
         <property name="proxyTargetClass" value="true"/>
 
     </bean>
+
+     <!-- 配置一个切面 -->
+    <bean id="greetingAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor" >
+        <property name="advice" ref="greetingBeforeAndAdvice" /> <!-- 增强 -->
+        <property name="pattern" value="com.smart4j.framework.aop.GreetingImpl.good.*"/> <!-- 切点（正则表达式） -->
+    </bean>
+    <!-- 配置一个代理 -->
+    <bean id="greetingProxyForAdvisor" class="org.springframework.aop.framework.ProxyFactoryBean" >
+        <!-- 目标类 -->
+        <property name="target" ref="greetingImpl"/>
+        <!-- 切面 -->
+        <property name="interceptorNames" value="greetingAdvisor"/>
+
+        <!-- 是否代理目标类 -->
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+    <!-- 可以为指定后缀的类动态的创建代理，这里不能用代理接口，应该代理类，因为不知道这些类实现了多少接口 -->
+    <!-- 既然cglib可以代理任何类，那么为什么jdk还需要用动态代理呢  ,cglib创建代理比较慢，创建完成以后很快，jdk则相反，各有优势-->
+    <!-- 一下这个是扫描到类，不能扫描到方法 -->
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator" >
+        <!-- 指定后缀-->
+        <property name="beanNames" value="*Impl"/>
+        <!-- 指定增强 -->
+        <property name="interceptorNames" value="greetingBeforeAndAdvice"/>
+        <property name="optimize" value="true"/><!-- 是否进行优化 -->
+    </bean>
+
+
 </beans>
