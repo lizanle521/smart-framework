@@ -20,7 +20,8 @@ public class IntroduceConfigClient {
         apology.saySorry("cc");
         System.out.println("---------");
         // 定义切面（包括增强和 切点（正则表达式）），然后定义advisor
-        GreetingImpl greetingProxyForAdvisor = (GreetingImpl)con.getBean("greetingProxyForAdvisor");
+        // 直接定义到方法的切面，然后动态创建代理类
+        GreetingImpl greetingProxyForAdvisor = (GreetingImpl)con.getBean("greetingImpl");
         greetingProxyForAdvisor.goodMorning("lzl");
     }
 }
