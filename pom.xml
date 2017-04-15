@@ -7,6 +7,23 @@
     <groupId>org.smart4j</groupId>
     <artifactId>smart-framework</artifactId>
     <version>1.0.0</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>       <!-- use this goal to weave all your main classes -->
+                            <goal>test-compile</goal>  <!-- use this goal to weave all your test classes -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -83,7 +100,17 @@
             <artifactId>spring-aspects</artifactId>
             <version>4.0.0.RELEASE</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjtools -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>1.8.9</version>
+        </dependency>
 
 
     </dependencies>

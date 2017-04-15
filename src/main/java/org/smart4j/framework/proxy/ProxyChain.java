@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * 为什么需要ProxyChain 来做这个链式调用呢？ 因为经过CGLib增强后的类不能再次被cglib增强
  * Created by lizanle on 2017/4/13.
  */
 public class ProxyChain {
@@ -61,6 +61,8 @@ public class ProxyChain {
     public Object[] getMethodParams() {
         return methodParams;
     }
+
+
 
     public Object doProxyChain() throws Throwable {
         Object methodResult;
