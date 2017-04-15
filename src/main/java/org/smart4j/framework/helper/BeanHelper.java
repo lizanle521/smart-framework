@@ -14,7 +14,7 @@ import java.util.Set;
  * Created by Administrator on 2017/3/16.
  */
 
-public class BeanHelper {
+public final class BeanHelper {
     private static final Logger logger = LoggerFactory.getLogger(BeanHelper.class);
     /**
      * 定义Bean映射 用于存放Bean与Bean实例之间的关系
@@ -50,6 +50,15 @@ public class BeanHelper {
         }else{
             throw new RuntimeException("cannot get bean class:"+cls);
         }
+    }
+
+    /**
+     * 设置bean 实例
+     * @param cls
+     * @param obj
+     */
+    public static void setBean(Class<?> cls,Object obj){
+        BEAN_MAP.put(cls,obj);
     }
 
 
