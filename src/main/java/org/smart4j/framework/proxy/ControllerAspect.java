@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import java.lang.reflect.Method;
 
 /**
+ *  代理类，代理的是被代理类上有注解Controller的类
  * Created by lizanle on 2017/4/14.
  */
 @Aspect(Controller.class)

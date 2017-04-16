@@ -1,8 +1,11 @@
 package org.smart4j.framework.helper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Aspect;
 import org.smart4j.framework.proxy.AspectProxy;
 import org.smart4j.framework.proxy.Proxy;
+import org.smart4j.framework.proxy.ProxyManager;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -11,6 +14,27 @@ import java.util.*;
  * Created by lizanle on 2017/4/14.
  */
 public final  class AopHelper {
+    private final static Logger logger = LoggerFactory.getLogger(AopHelper.class);
+    /**
+     * 初始化aop框架
+     */
+    static {
+        try {
+            // 获取被代理的类（譬如有注解@Aspect(Controller.class)） 与 代理类集合(AspectProxy的子类)的map
+            Map<Class<?>, Set<Class<?>>> proxyMap = createProxyMap();
+            // 获取被代理的类（譬如有注解@Aspect(Controller.class))
+            Map<Class<?>, List<Proxy>> targetMap = createTargetMap(proxyMap);
+            Set<Map.Entry<Class<?>, List<Proxy>>> entries = targetMap.entrySet();
+            for (Map.Entry<Class<?>, List<Proxy>> entry : entries) {
+                Class<?> targetClass = entry.getKey();
+                List<Proxy> proxyList = entry.getValue();
+                Object proxy = ProxyManager.createProxy(targetClass, proxyList);
+                BeanHelper.setBean(targetClass,proxy);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 获取所有带Acpect注解里边声明的类
